@@ -1,0 +1,503 @@
+/* ==========================================
+   1. STYLES DE BASE & VARIABLES
+   ========================================== */
+:root {
+    --gold-primary: #f39c12;
+    --gold-light: #f1c40f;
+    --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+    --gold-glow: rgba(243, 156, 18, 0.4);
+    --bg-dark: #0a0a0c;
+    --card-bg: rgba(18, 18, 22, 0.75);
+    --card-border: rgba(212, 175, 55, 0.3);
+    --text-light: #f4f4f6;
+    --whatsapp-color: #25D366;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Image d'arrière-plan avec overlay transparent */
+.bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(10, 10, 12, 0.82), rgba(10, 10, 12, 0.92)),
+                url('5929391923854512398_121.jpg') no-repeat center center / cover;
+    z-index: -2;
+}
+
+/* Canvas pour animation de particules dorées */
+#particles-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* ==========================================
+   2. TYPOGRAPHIE & REUTILISABLES
+   ========================================== */
+.gold-text {
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Cinzel', serif;
+    letter-spacing: 2px;
+}
+
+.gold-button {
+    background: var(--gold-gradient);
+    color: #000;
+    font-weight: 800;
+    padding: 14px 28px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px var(--gold-glow);
+}
+
+.gold-button:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 30px rgba(243, 156, 18, 0.7);
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+
+/* ==========================================
+   3. EN-TÊTE / HERO SECTION
+   ========================================== */
+header {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px 20px;
+    position: relative;
+}
+
+.badge-amazigh {
+    border: 1px solid var(--gold-primary);
+    color: var(--gold-light);
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+}
+
+.hero-title {
+    font-size: 4rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+    text-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    color: #ccc;
+    font-weight: 300;
+    margin-bottom: 35px;
+    letter-spacing: 3px;
+}
+
+.hero-contacts {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn-tiktok {
+    background: #000;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 14px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+}
+
+.btn-tiktok:hover {
+    border-color: #ff0050;
+    box-shadow: 0 0 15px rgba(255, 0, 80, 0.5);
+    transform: translateY(-3px);
+}
+
+/* ==========================================
+   4. CARTES DES ÉVÉNEMENTS (4 ICÔNES)
+   ========================================== */
+.events-section {
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.event-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 35px 20px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.4s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.event-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.event-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--gold-light);
+    box-shadow: 0 10px 30px rgba(243, 156, 18, 0.3);
+}
+
+.event-card:hover::before {
+    opacity: 1;
+}
+
+.event-icon-box {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(243, 156, 18, 0.1);
+    border: 2px solid var(--gold-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: var(--gold-light);
+    transition: 0.4s ease;
+}
+
+.event-card:hover .event-icon-box {
+    background: var(--gold-gradient);
+    color: #000;
+    transform: rotateY(360deg);
+}
+
+.event-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.event-desc {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-bottom: 20px;
+}
+
+.whatsapp-badge {
+    background: var(--whatsapp-color);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* ==========================================
+   5. BOUTON / ICÔNE "MON TRAVAIL" (VIDÉOS MODALE)
+   ========================================== */
+.portfolio-trigger-section {
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.portfolio-icon-btn {
+    background: var(--card-bg);
+    border: 2px solid var(--gold-primary);
+    color: var(--text-light);
+    padding: 16px 35px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    transition: 0.3s;
+    box-shadow: 0 4px 20px var(--gold-glow);
+}
+
+.portfolio-icon-btn i {
+    color: var(--gold-light);
+    font-size: 1.4rem;
+}
+
+.portfolio-icon-btn:hover {
+    background: var(--gold-gradient);
+    color: #000;
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 30px rgba(243, 156, 18, 0.7);
+}
+
+.portfolio-icon-btn:hover i {
+    color: #000;
+}
+
+/* Style de la Fenêtre Modale Vidéo */
+.video-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s ease;
+}
+
+.video-modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.video-modal-content {
+    background: rgba(18, 18, 22, 0.95);
+    border: 2px solid var(--gold-primary);
+    border-radius: 25px;
+    width: 90%;
+    max-width: 900px;
+    padding: 35px 20px;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+}
+
+.close-video-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: var(--gold-light);
+    font-size: 2.2rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.close-video-modal:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.modal-videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    margin-top: 25px;
+    padding: 0 10px;
+}
+
+.modal-video-card {
+    background: #000;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+
+.modal-video-card video {
+    width: 100%;
+    aspect-ratio: 9/16;
+    object-fit: cover;
+    display: block;
+}
+
+/* ==========================================
+   6. SECTION RESERVATION FORM
+   ========================================== */
+.booking-section {
+    padding: 80px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.booking-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 25px;
+    padding: 40px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--gold-light);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.form-control {
+    width: 100%;
+    padding: 14px 18px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-control:focus {
+    border-color: var(--gold-light);
+    box-shadow: 0 0 10px var(--gold-glow);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* ==========================================
+   7. FOOTER & CONTACTS
+   ========================================== */
+footer {
+    background: rgba(5, 5, 8, 0.95);
+    border-top: 1px solid var(--card-border);
+    padding: 50px 20px 30px;
+    text-align: center;
+}
+
+.contact-phones {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin: 30px 0;
+}
+
+.phone-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px 25px;
+    border-radius: 15px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.phone-item:hover {
+    border-color: var(--gold-primary);
+    background: rgba(243, 156, 18, 0.1);
+    transform: scale(1.05);
+}
+
+.tiktok-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    transition: 0.3s;
+}
+
+.tiktok-link:hover {
+    color: var(--gold-light);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.copyright {
+    color: #777;
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 20px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .hero-title { font-size: 2.8rem; }
+    .hero-subtitle { font-size: 1.1rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .booking-card { padding: 25px; }
+}

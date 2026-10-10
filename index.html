@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ BERBER - Le Spécialiste de l'Ambiance</title>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Fichier CSS externe -->
+    <link rel="stylesheet" href="style.css">
+<base target="_blank">
+</head>
+<body>
+
+    <!-- Arrière-plan transparent image + canvas particules -->
+    <div class="bg-overlay"></div>
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Header / Hero Section -->
+    <header>
+        <div class="badge-amazigh">&#9827; LE SPÉCIALISTE DE L'AMBIANCE &#9827;</div>
+        <h1 class="hero-title gold-text">DJ BERBER</h1>
+        <p class="hero-subtitle">« Votre événement mérite l’excellence »</p>
+
+        <div class="hero-contacts">
+            <a href="#events" class="gold-button">
+                <i class="fa-solid fa-calendar-check"></i> Réserver Date
+            </a>
+            <a href="https://www.tiktok.com/@dj_berber6?_r=1&_t=ZS-9AQK6QnIHfY" target="_blank" class="btn-tiktok">
+                <i class="fa-brands fa-tiktok"></i> TikTok
+            </a>
+        </div>
+    </header>
+
+    <!-- Section 4 Événements principaux (Réservation WhatsApp) -->
+    <section class="events-section" id="events">
+        <h2 class="section-title gold-text">Choisissez votre Événement</h2>
+
+        <div class="events-grid">
+            <!-- 1. Mariage -->
+            <a href="https://wa.me/213663951108?text=Bonjour%20DJ%20BERBER,%20je%20souhaite%20réserver%20pour%20un%20Mariage." target="_blank" class="event-card">
+                <div class="event-icon-box">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <h3 class="event-title">Mariages</h3>
+                <p class="event-desc">Une ambiance inoubliable pour le plus beau jour de votre vie.</p>
+                <span class="whatsapp-badge"><i class="fa-brands fa-whatsapp"></i> Réserver sur WhatsApp</span>
+            </a>
+
+            <!-- 2. BAC -->
+            <a href="https://wa.me/213663951108?text=Bonjour%20DJ%20BERBER,%20je%20souhaite%20réserver%20pour%20une%20fête%20du%20BAC." target="_blank" class="event-card">
+                <div class="event-icon-box">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h3 class="event-title">Fête du BAC</h3>
+                <p class="event-desc">Célébrez la réussite du Baccalauréat avec de la bonne musique.</p>
+                <span class="whatsapp-badge"><i class="fa-brands fa-whatsapp"></i> Réserver sur WhatsApp</span>
+            </a>
+
+            <!-- 3. BEM -->
+            <a href="https://wa.me/213663951108?text=Bonjour%20DJ%20BERBER,%20je%20souhaite%20réserver%20pour%20une%20fête%20du%20BEM." target="_blank" class="event-card">
+                <div class="event-icon-box">
+                    <i class="fa-solid fa-award"></i>
+                </div>
+                <h3 class="event-title">Fête du BEM</h3>
+                <p class="event-desc">Fêtez la réussite du brevet dans une ambiance festive et moderne.</p>
+                <span class="whatsapp-badge"><i class="fa-brands fa-whatsapp"></i> Réserver sur WhatsApp</span>
+            </a>
+
+            <!-- 4. Anniversaire & Soirée -->
+            <a href="https://wa.me/213663951108?text=Bonjour%20DJ%20BERBER,%20je%20souhaite%20réserver%20pour%20un%20Anniversaire%20/%20Soirée." target="_blank" class="event-card">
+                <div class="event-icon-box">
+                    <i class="fa-solid fa-cake-candles"></i>
+                </div>
+                <h3 class="event-title">Anniversaires & Soirées</h3>
+                <p class="event-desc">Soirées privées, anniversaires et événements spéciaux sur mesure.</p>
+                <span class="whatsapp-badge"><i class="fa-brands fa-whatsapp"></i> Réserver sur WhatsApp</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Section Icône "Mon Travail" : en cliquant, une fenêtre s'ouvre avec les vidéos -->
+    <section class="portfolio-trigger-section" id="portfolio">
+        <h2 class="section-title gold-text">Anciennes Expériences</h2>
+        <button class="portfolio-icon-btn" id="openVideoModal">
+            <i class="fa-solid fa-video"></i> Voir Mon Travail
+        </button>
+    </section>
+
+    <!-- Fenêtre Modale Vidéo (cachée par défaut) -->
+    <div class="video-modal-overlay" id="videoModal">
+        <div class="video-modal-content">
+            <button class="close-video-modal" id="closeVideoModal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h2 class="section-title gold-text" style="margin-bottom: 0;">Mon Travail & Ambiance</h2>
+
+            <div class="modal-videos-grid">
+                <!-- Vidéo 1 -->
+                <div class="modal-video-card">
+                    <video controls preload="metadata" playsinline>
+                        <source src="video1.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
+                </div>
+
+                <!-- Vidéo 2 -->
+                <div class="modal-video-card">
+                    <video controls preload="metadata" playsinline>
+                        <source src="video2.mp4" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section Formulaire de Réservation -->
+    <section class="booking-section">
+        <div class="booking-card">
+            <h2 class="section-title gold-text" style="margin-bottom: 20px;">Demande de Devis / Date</h2>
+            <form id="whatsappForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-user"></i> Nom Complet</label>
+                        <input type="text" id="name" class="form-control" placeholder="Votre nom" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-music"></i> Type d'Événement</label>
+                        <select id="eventType" class="form-control">
+                            <option value="Mariage">Mariage</option>
+                            <option value="Fête du BAC">Fête du BAC</option>
+                            <option value="Fête du BEM">Fête du BEM</option>
+                            <option value="Anniversaire / Soirée">Anniversaire / Soirée</option>
+                            <option value="Autre Événement">Autre</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-calendar"></i> Date prévue</label>
+                        <input type="date" id="eventDate" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fa-solid fa-location-dot"></i> Wilaya / Lieu</label>
+                        <input type="text" id="location" class="form-control" placeholder="Ex: Tizi Ouzou, Béjaïa..." required>
+                    </div>
+                </div>
+
+                <button type="submit" class="gold-button" style="width: 100%; justify-content: center; margin-top: 10px;">
+                    <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i> Envoyer via WhatsApp
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer & Contact -->
+    <footer>
+        <h2 class="gold-text" style="font-size: 1.8rem; margin-bottom: 10px;">DJ BERBER</h2>
+        <p style="color: #aaa;">Contactez-nous directement pour vos réservations</p>
+
+        <div class="contact-phones">
+            <a href="tel:0663951108" class="phone-item">
+                <i class="fa-solid fa-phone-volume"></i> 06 63 95 11 08
+            </a>
+            <a href="tel:0557560654" class="phone-item">
+                <i class="fa-solid fa-phone-volume"></i> 05 57 56 06 54
+            </a>
+        </div>
+
+        <div>
+            <a href="https://www.tiktok.com/@dj_berber6?_r=1&_t=ZS-9AQK6QnIHfY" target="_blank" class="tiktok-link">
+                <i class="fa-brands fa-tiktok"></i> Suivez-nous sur TikTok @dj_berber6
+            </a>
+        </div>
+
+        <div class="copyright">
+            &copy; DJ BERBER - MAMI a votre disposition 
+        sR.R
+        </div>
+    </footer>
+
+    <!-- Fichier JavaScript externe -->
+    <script src="script.js"></script>
+</body>
+</html>
